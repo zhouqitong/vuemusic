@@ -50,8 +50,12 @@ apiRoutes.get('/lyric', function (req, res) {
     },
     params: req.query
   }).then((response) => {
-    var ret = response.data
+
+    // 因为返回的还是jsonp的格式 所以需要做个处理
+   var ret = response.data
     if (typeof ret === 'string') {
+     // ^\w+ 任意字符开头 之后\( 转义括号 接着 外面的中括号中间不是小括号的任意字符
+      // 这样就拿到了callback里面的json String
       var reg = /^\w+\(({[^()]+})\)$/
       var matches = ret.match(reg)
       if (matches) {
