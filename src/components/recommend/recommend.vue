@@ -40,6 +40,7 @@
   import Scroll from 'base/scroll/scroll'
   import Loading from 'base/loading/loading'
   import {playlistMixin} from 'common/js/mixin'
+  import {mapMutations} from 'vuex'
 
   export default {
     mixins: [playlistMixin],
@@ -64,6 +65,12 @@
         this.$refs.recommend.style.bottom = bottom
         this.$refs.scroll.refresh()
       },
+      selectItem(item) {
+        this.$router.push({
+          path: `/recommend/${item.dissid}`
+        })
+        this.setDisc(item)
+      },
       _getRecommend() {
         getRecommend().then(res => {
           if (res.code === ERR_OK) {
@@ -75,8 +82,12 @@
         getDiscList().then((res) => {
           this.discList = res.data.list
         })
-      }
+      },
+      ...mapMutations({
+        setDisc: 'SET_DISC'
+      })
     }
+
   }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
