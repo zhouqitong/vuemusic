@@ -36,9 +36,6 @@ export function getDiscList () {
 // 这个api已经
 export function getSongList(disstid) {
   const url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
-  // const url = 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_album_info_cp.fcg'
-  //https://c.y.qq.com/v8/fcg-bin/fcg_v8_album_info_cp.fcg
-
   const data = Object.assign({}, commonParams, {
     disstid,
     type: 1,
@@ -48,8 +45,6 @@ export function getSongList(disstid) {
     platform: 'yqq',
     hostUin: 0,
     needNewCode: 0
-
     })
-
   return jsonp(url, data, options)
 }
